@@ -1,0 +1,23 @@
+import { Button, HorizontalBox, TextEdit } from "std-widgets.slint";
+import { Counter } from "widgets/counter.slint";
+
+export component AppWindow inherits Window {
+  title: "Migrat";
+  icon: @image-url("public/icon.png");
+  preferred-width: 1000px;
+  preferred-height: 750px;
+  padding: 10px;
+
+  in-out property <int> counter: 0;
+  callback request-increase-value();
+  callback request-decrease-value();
+
+  VerticalLayout {
+    alignment: center;
+    Counter{
+      counter: root.counter;
+      request-increase-value => { root.request-increase-value(); }
+      request-decrease-value => { root.request-decrease-value(); }
+    }
+  }
+}
