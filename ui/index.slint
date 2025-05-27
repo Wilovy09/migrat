@@ -2,22 +2,44 @@ import { Button, HorizontalBox, TextEdit } from "std-widgets.slint";
 import { Counter } from "widgets/counter.slint";
 
 export component AppWindow inherits Window {
-  title: "Migrat";
-  icon: @image-url("public/icon.png");
-  preferred-width: 1000px;
-  preferred-height: 750px;
-  padding: 10px;
+    title: "Migrat";
+    icon: @image-url("public/icon.png");
+    preferred-width: 1000px;
+    preferred-height: 750px;
+    padding: 10px;
+    in-out property <string> endpoint;
+    in-out property <string> response_text;
+    callback fetch_data();
+    VerticalLayout {
+        spacing: 10px;
+        Text {
+            text: "Endpont...";
+        }
 
-  in-out property <int> counter: 0;
-  callback request-increase-value();
-  callback request-decrease-value();
+        TextInput {
+            text: root.endpoint;
+            edited => {
+                root.endpoint = self.text;
+            }
+        }
 
-  VerticalLayout {
-    alignment: center;
-    Counter{
-      counter: root.counter;
-      request-increase-value => { root.request-increase-value(); }
-      request-decrease-value => { root.request-decrease-value(); }
+        Button {
+            text: "Send Request";
+            clicked => {
+                if (root.endpoint != "") {
+                    root.fetch_data();
+                }
+            }
+        }
+
+        Text {
+            text: "Response:";
+        }
+
+        TextEdit {
+            text: root.response_text;
+            width: 100%;
+            height: 500px;
+        }
     }
-  }
 }
