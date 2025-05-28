@@ -1,0 +1,12 @@
+import { Button } from "std-widgets.slint";
+export component SettingsPage {
+    callback navigate_to_home;
+    Button {
+        text: "Inicio";
+        width: 200px;
+        height: 50px;
+        clicked => {
+            navigate_to_home();
+        }
+    }
+}

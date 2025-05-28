@@ -1,0 +1,28 @@
+
+import { Button } from "std-widgets.slint";
+export component Counter {
+  in-out property <int> counter: 1;
+  callback request-increase-value();
+  callback request-decrease-value();
+  HorizontalLayout {
+    spacing: 10px;
+    Button {
+      text: "Decrease";
+      clicked => { root.request-decrease-value(); }
+    }
+    VerticalLayout {
+      spacing: 5px;
+      Text {
+        text: "Counter: \{root.counter}";
+        horizontal-alignment: center;
+        vertical-alignment: center;
+        width: 100px;
+        height: 50px;
+      }
+    }
+    Button {
+      text: "Increase";
+      clicked => { root.request-increase-value(); }
+    }
+  }
+}
