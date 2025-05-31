@@ -5,3 +5,4 @@ edition = "2024"
 
 [dependencies]
 freya = "0.3.3"
+calamine = "0.22"
